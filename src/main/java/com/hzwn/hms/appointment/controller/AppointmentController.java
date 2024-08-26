@@ -5,7 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.hzwn.hms.appointment.model.Appointment;
 import com.hzwn.hms.appointment.service.AppointmentService;
+import com.hzwn.hms.model.AppointmentModel;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @RestController
@@ -16,7 +18,7 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     // Create a new appointment
-    @PostMapping
+    @PostMapping("/createAppointment")
     public ResponseEntity<Appointment> createAppointment(@RequestBody Appointment appointment) {
         Appointment savedAppointment = appointmentService.saveAppointment(appointment);
         return ResponseEntity.ok(savedAppointment);
@@ -31,8 +33,8 @@ public class AppointmentController {
 
     // Get an appointment by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Appointment> getAppointmentById(@PathVariable Long id) {
-        Appointment appointment = appointmentService.getAppointmentById(id);
+    public ResponseEntity<AppointmentModel> getAppointmentById(@PathVariable Long id) throws IllegalAccessException, InvocationTargetException {
+        AppointmentModel appointment = appointmentService.getAppointmentById(id);
         return appointment != null ? ResponseEntity.ok(appointment) : ResponseEntity.notFound().build();
     }
 

@@ -17,6 +17,8 @@ public class Appointment {
 	private Long doctorId; // Reference to Doctor ID
 	@Column(name = "appointment_date", nullable = false)
 	private LocalDateTime appointmentDate;
+	@Column(name = "appointment_end_time", nullable = false)
+	private LocalDateTime appointmentEndTime;
 	@Column(name = "status", nullable = false)
 	private String status; // e.g., "SCHEDULED", "CANCELLED", "COMPLETED"
 
@@ -26,6 +28,14 @@ public class Appointment {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public LocalDateTime getAppointmentEndTime() {
+		return appointmentEndTime;
+	}
+
+	public void setAppointmentEndTime(LocalDateTime appointmentEndTime) {
+		this.appointmentEndTime = appointmentEndTime;
 	}
 
 	public Long getPatientId() {
