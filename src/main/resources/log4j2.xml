@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<configuration>
+
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%-5p] [%d{hh:mm:ss a}][%c] %m%n" />
+		</Console>
+
+		<RollingRandomAccessFile name="RollingRandomAccessFile" fileName="/data/hms/appointment/log-${env:HOSTNAME:-hms-appointment-no_container_id}.txt" filePattern="/data/hms/appointment/$${date:yyyy-MM}/log-hms-appointment-%d{yyyy-MM-dd}-%i.gz">
+			<PatternLayout pattern="[%t][%p][%d{yyyy-MM-dd hh:mm:ss.SSS a}][%c] %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+				<SizeBasedTriggeringPolicy size="500 MB"/>
+			</Policies>
+		</RollingRandomAccessFile>
+
+		<Async name="Async">
+			<appender-ref ref="Console" />
+			<appender-ref ref="RollingRandomAccessFile" />
+		</Async>
+	</appenders>
+
+	<loggers>
+
+ 		<logger name="com.hzwn" level="debug" />
+		<logger name="net.bull" level="debug" /> 		
+		
+		<root level="info">
+			<appender-ref ref="Async"/>
+		</root>
+
+	</loggers>
+
+</configuration>

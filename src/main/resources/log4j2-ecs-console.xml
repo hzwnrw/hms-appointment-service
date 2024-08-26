@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+ 
+<configuration>
+       <appenders>
+              <Console name="Console" target="SYSTEM_OUT">
+                     <EcsLayout />
+              </Console>
+       </appenders>
+</configuration>
